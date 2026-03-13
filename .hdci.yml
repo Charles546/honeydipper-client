@@ -4,3 +4,8 @@ triggers:
       gh_event: whatever
     stages:
       - whatever
+
+stages:
+  steps:
+    - test
+    - quality
