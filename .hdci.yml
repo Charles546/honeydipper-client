@@ -1,3 +1,6 @@
 ---
-this:
-  that
+triggers:
+  - conditions:
+      gh_event: whatever
+    stages:
+      - whatever
