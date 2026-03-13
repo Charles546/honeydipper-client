@@ -1,7 +1,7 @@
 ---
 triggers:
   - conditions:
-      gh_event: whatever
+      gh_event: issue_comment
     stages:
       - whatever
 
