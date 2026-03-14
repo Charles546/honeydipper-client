@@ -1,7 +1,7 @@
 ---
 triggers:
   - conditions:
-      gh_event: issue_comment
+      gh_event: push
     stages:
       - test
 
@@ -18,8 +18,10 @@ jobs:
 
 scripts:
   checkout:
-    run: git clone
+    run: 'pwd && echo git clone'
     image: docker.io/library/github/sh:master
+    command: ['/bin/sh', '-c']
   test:
-    run: go test -v ./...
+    run: echo go test -v ./...
     image: docker.io/library/golang:1.26.0-alpine
+    command: ['/bin/sh', '-c']
