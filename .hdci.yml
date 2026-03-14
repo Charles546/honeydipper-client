@@ -3,10 +3,23 @@ triggers:
   - conditions:
       gh_event: issue_comment
     stages:
-      - whatever
+      - test
 
 stages:
   test:
     steps:
       - test
-      - quality
+
+jobs:
+  test:
+    script_name: test
+    pre_steps:
+      - checkout
+
+scripts:
+  checkout:
+    run: git clone
+    image: docker.io/library/github/sh:master
+  test:
+    run: go test -v ./...
+    image: docker.io/library/golang:1.26.0-alpine
