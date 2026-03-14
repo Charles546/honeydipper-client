@@ -19,7 +19,7 @@ jobs:
 scripts:
   checkout:
     run: 'pwd && echo git clone'
-    image: docker.io/library/github/sh:master
+    image: docker.io/library/alpine/git:latest
     command: ['/bin/sh', '-c']
   test:
     run: echo go test -v ./...
