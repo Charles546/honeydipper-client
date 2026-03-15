@@ -24,15 +24,14 @@ scripts:
       SEC_DRIVER: $ctx.hdci.worker.sec_driver
       WORK_DIR: $ctx.hdci.worker.work_dir,"/local/honeydipper"
     image: $ctx.hdci.worker.sec_driver_image
-    run: cp $SEC_DRIVER $WORK_DIR
+    run: cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh $WORK_DIR
   checkout:
     run: echo $GH_APP_KEY | head -n 2
     image: docker.io/alpine/git:latest
     env: $?ctx.hdci.worker.env
     volumes: $?ctx.hdci.worker.volumes
     entrypoint:
-      - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/{{ base .ctx.hdci.worker.sec_driver }}'
-      - 'exec'
+      - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/docker-entrypoint.sh'
       - '/bin/sh'
       - '-c'
   test:
