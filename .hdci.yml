@@ -22,9 +22,9 @@ scripts:
     entrypoint: ['/bin/sh', '-c']
     env:
       SEC_DRIVER: $ctx.hdci.worker.sec_driver
-      WORK_DIR: $ctx.hdci.worker.work_dir,"/opt/honey"
+      WORK_DIR: $ctx.hdci.worker.work_dir,"/opt/honeydipper"
     image: $ctx.hdci.worker.sec_driver_image
-    run: cp $SEC_DRIVER $WORKDIR
+    run: cp $SEC_DRIVER $WORK_DIR
   checkout:
     run: echo $GH_APP_KEY | head -n 2
     image: docker.io/alpine/git:latest
