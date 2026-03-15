@@ -7,15 +7,15 @@ triggers:
 
 stages:
   test:
-    steps:
+    jobs:
       - test
 
 jobs:
   test:
-    script_name: test
-    pre_steps:
+    steps:
       - secretDriverLoader
       - checkout
+      - test
 
 scripts:
   secretDriverLoader:
