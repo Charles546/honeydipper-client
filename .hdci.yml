@@ -18,7 +18,7 @@ jobs:
 
 scripts:
   checkout:
-    run: 'pwd && echo git clone'
+    run: echo git clone
     image: docker.io/alpine/git:latest
     entrypoint: ['/bin/sh', '-c']
   test:
