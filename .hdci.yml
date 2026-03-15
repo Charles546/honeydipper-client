@@ -26,7 +26,7 @@ scripts:
     image: $ctx.hdci.worker.sec_driver_image
     run: cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh $WORK_DIR
   checkout:
-    run: echo $GH_APP_KEY | head -n 2
+    run: echo decrypted
     image: docker.io/alpine/git:latest
     env: $?ctx.hdci.worker.env
     volumes: $?ctx.hdci.worker.volumes
