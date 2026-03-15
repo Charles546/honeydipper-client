@@ -20,7 +20,7 @@ scripts:
   checkout:
     run: 'pwd && echo git clone'
     image: docker.io/alpine/git:latest
-    command: ['/bin/sh', '-c']
+    entrypoint: ['/bin/sh', '-c']
   test:
     run: echo go test -v ./...
     image: docker.io/library/golang:1.26.0-alpine
