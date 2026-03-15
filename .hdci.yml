@@ -24,7 +24,7 @@ scripts:
       SEC_DRIVER: $ctx.hdci.worker.sec_driver
       WORK_DIR: $ctx.hdci.worker.work_dir,"/local/honeydipper"
     image: $ctx.hdci.worker.sec_driver_image
-    run: cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh $WORK_DIR
+    run: cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh $WORK_DIR && copied
   checkout:
     run: echo decrypted
     image: docker.io/alpine/git:latest
