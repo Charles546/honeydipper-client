@@ -1,6 +1,6 @@
 ---
 use_templates:
-  - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl
+  - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl.yml
 
 triggers:
   - conditions:
@@ -16,6 +16,9 @@ stages:
 jobs:
   test:
     steps:
-      - secretDriverLoader
-      - checkout
-      - test
+      - load_secret_driver
+      - github_checkout
+      - script_name: test
+        executor: sh-c
+        run: echo go test -v ./...
+        image: docker.io/library/golang:1.26.0-alpine
