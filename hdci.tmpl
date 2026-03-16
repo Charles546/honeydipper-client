@@ -1,0 +1,22 @@
+---
+scripts:
+  secretDriverLoader:
+    entrypoint: ['/bin/sh', '-c']
+    env:
+      SEC_DRIVER: $ctx.hdci.worker.sec_driver
+      WORK_DIR: $ctx.hdci.worker.work_dir,"/local/honeydipper"
+    image: $ctx.hdci.worker.sec_driver_image
+    run: cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh $WORK_DIR && echo copied
+  checkout:
+    run: echo decrypted
+    image: docker.io/alpine/git:latest
+    env: $?ctx.hdci.worker.env
+    volumes: $?ctx.hdci.worker.volumes
+    entrypoint:
+      - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/docker-entrypoint.sh'
+      - '/bin/sh'
+      - '-c'
+  test:
+    run: echo go test -v ./...
+    image: docker.io/library/golang:1.26.0-alpine
+    entrypoint: ['/bin/sh', '-c']
