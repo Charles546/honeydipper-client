@@ -46,5 +46,5 @@ scripts:
     run_: 'mkdir -p "$WORK_DIR/bin" && cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh "$WORK_DIR" && echo sec driver copied'
     run: ""
   github_checkout:
-    run: 'git clone https://github.com/"${GITHUB_REPO:-{{ .ctx.git_repo -}} }.git" --branch "${GITHUB_BRANCH:-{{ base .ctx.git_ref -}} }" app'
+    run: 'git clone https://github.com/"${GITHUB_REPO:-{{ .ctx.git_repo -}} }.git" --branch "${GITHUB_BRANCH:-{{ printf "%+v" .ctx.git_ref | fail -}} }" app'
     executor: gh_with_app
