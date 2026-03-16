@@ -18,7 +18,7 @@ jobs:
     steps:
       - load_secret_driver
       - github_checkout
-      - script_name: test
+      - container_name: test
         executor: sh-c
         run: echo go test -v ./...
         image: docker.io/library/golang:1.26.0-alpine
