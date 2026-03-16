@@ -1,5 +1,6 @@
 ---
-use_template: Charles546/honeydipper-client@refs/heads/test:hdci.tmpl
+use_templates:
+  - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl
 
 triggers:
   - conditions:
