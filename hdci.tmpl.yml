@@ -2,6 +2,7 @@
 executors:
   with_secret_driver: &with_secret_driver
     entrypoint_:
+      - '/usr/bin/bash'
       - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/docker-entrypoint.sh'
     env: $ctx.hdci.worker.identity.env
     volumes_: $ctx.hdci.worker.identity.volumes
@@ -43,7 +44,7 @@ scripts:
       SEC_DRIVER: $ctx.hdci.worker.identity.sec_driver
       WORK_DIR: $ctx.hdci.worker.work_dir,"/local/honeydipper"
     image: $ctx.hdci.worker.identity.sec_driver_image
-    run_: 'mkdir -p "$WORK_DIR/bin" && cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh "$WORK_DIR" && echo sec driver copied'
+    run_: 'cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh "$WORK_DIR" && echo sec driver copied && ls -l $WORK_DIR'
     run: ""
   github_checkout:
     run: 'git clone https://github.com/"${GITHUB_REPO:-{{ .ctx.git_repo -}} }.git" --branch "${GITHUB_BRANCH:-{{ toString .ctx.git_ref | base -}} }" app'
