@@ -9,7 +9,7 @@ executors:
 
   sh-c: &sh-c
     command_++: &sh-c-command
-      - /usr/bin/bash
+      - /bin/sh
       - -c
 
   with_gh_app_creds: &with_gh_app_creds
