@@ -3,7 +3,6 @@ executors:
   with_secret_driver: &with_secret_driver
     entrypoint_:
       - '/usr/bin/bash'
-      - '-x'
       - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/docker-entrypoint.sh'
     env: $ctx.hdci.worker.identity.env
     volumes_: $ctx.hdci.worker.identity.volumes
@@ -22,7 +21,7 @@ executors:
       - *sh-c
     entrypoint_+: &gh_entrypoint
       - '/entrypoint.sh'
-    image: 'docker.io/serversideup/github-cli:latest'
+    image: 'docker.io/serversideup/github-cli:alpine'
     run_: |+
       git config --global credential."https://github.com/".helper "!gh app-auth git-credential"
 
