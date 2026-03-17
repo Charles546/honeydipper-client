@@ -21,6 +21,6 @@ jobs:
       - container_name: test
         executor:
           - sh-c
-          - run-in-repo
+          - run_in_repo
         run: ls -l
         image: docker.io/library/golang:1.26.0-alpine
