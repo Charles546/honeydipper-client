@@ -3,6 +3,8 @@ executors:
   with_secret_driver: &with_secret_driver
     entrypoint_:
       - '/usr/bin/bash'
+      - '-c'
+      - 'ls -l /local/honeydipper && exit 1'
       - '{{ coalesce .ctx.hdci.worker.work_dir "/local/honeydipper" }}/docker-entrypoint.sh'
     env: $ctx.hdci.worker.identity.env
     volumes_: $ctx.hdci.worker.identity.volumes
