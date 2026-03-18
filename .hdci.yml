@@ -3,7 +3,7 @@ use_templates:
   - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl.yml
 
 cache:
-  /local/cached: $?ctx.git_commit
+  /local/cached: 'hd-cache-{{ .ctx.git_repo }}-{{ trunc 7 .ctx.git_ref }}'
 
 
 triggers:
