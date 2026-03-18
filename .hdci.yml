@@ -12,7 +12,7 @@ triggers:
 stages:
   check-license:
     jobs:
-      - job-name: check-license
+      - job_name: check-license
         steps:
           - image: docker.io/library/golang:1.26.0-alpine
             executor: sh-c
@@ -20,7 +20,7 @@ stages:
   test:
     jobs:
       - test
-    require:
+    requires:
       - check-license
 
 jobs:
