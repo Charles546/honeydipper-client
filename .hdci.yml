@@ -3,7 +3,7 @@ use_templates:
   - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl.yml
 
 cache:
-  /local/cahced: $?ctx.git_commit
+  /local/cached: $?ctx.git_commit
 
 
 triggers:
