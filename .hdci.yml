@@ -7,11 +7,21 @@ triggers:
       gh_event: push
     stages:
       - test
+      - check-license
 
 stages:
+  check-license:
+    jobs:
+      - job-name: check-license
+        steps:
+          - image: docker.io/library/golang:1.26.0-alpine
+            executor: sh-c
+            run: sleep 10 && echo sleeped and done
   test:
     jobs:
       - test
+    require:
+      - check-license
 
 jobs:
   test:
