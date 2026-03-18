@@ -40,4 +40,5 @@ jobs:
           - run_in_repo
         run: ls -l && date > /local/cached/current_time
         image: docker.io/library/golang:1.26.0-alpine
-    cache: /local/cached
+    cache:
+      - /local/cached
