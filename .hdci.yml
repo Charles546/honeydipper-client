@@ -2,6 +2,10 @@
 use_templates:
   - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl.yml
 
+cache:
+  /local/cahced: $?ctx.git_commit
+
+
 triggers:
   - conditions:
       gh_event: push
@@ -16,7 +20,9 @@ stages:
         steps:
           - image: docker.io/library/golang:1.26.0-alpine
             executor: sh-c
-            run: sleep 10 && echo sleeped and done && exit 1
+            run: sleep 10 && echo sleeped and done && ls -l /local/cached
+            cache:
+              - /local/cached
   test:
     jobs:
       - test
@@ -32,5 +38,6 @@ jobs:
         executor:
           - sh-c
           - run_in_repo
-        run: ls -l
+        run: ls -l && date > /local/cached/current_time
         image: docker.io/library/golang:1.26.0-alpine
+    cache: /local/cached
