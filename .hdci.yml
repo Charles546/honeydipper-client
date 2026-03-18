@@ -16,7 +16,7 @@ stages:
         steps:
           - image: docker.io/library/golang:1.26.0-alpine
             executor: sh-c
-            run: sleep 10 && echo sleeped and done
+            run: sleep 10 && echo sleeped and done && exit 1
   test:
     jobs:
       - test
