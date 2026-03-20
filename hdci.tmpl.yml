@@ -59,4 +59,4 @@ scripts:
 
 default_script_steps:
   - load_secret_driver
-  - gh_checkout
+  - github_checkout
