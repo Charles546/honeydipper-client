@@ -50,7 +50,7 @@ scripts:
     image: $ctx.hdci.worker.identity.sec_driver_image
     run_: 'cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh "$WORK_DIR" && echo sec driver copied'
     run: ""
-    skip_executor:  "*"
+    skip_executors:  "*"
 
   github_checkout:
     run: 'git clone https://github.com/"${GITHUB_REPO:-{{ .ctx.git_repo -}} }.git" --branch "${GITHUB_BRANCH:-{{ toString .ctx.git_ref | base -}} }" app'
