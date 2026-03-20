@@ -12,7 +12,7 @@ executors:
     cache:
       - /local/cached
 
-default_executors+:
+default_executors++:
   - golang
 
 triggers:
