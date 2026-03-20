@@ -20,7 +20,6 @@ stages:
       - job_name: check-license
         steps:
           - image: docker.io/library/golang:1.26.0-alpine
-            executor: sh-c
             run: sleep 10 && echo sleeped and done && ls -l /local/cached
             cache:
               - /local/cached
@@ -34,11 +33,10 @@ jobs:
   test:
     steps:
       - container_name: test
-        executor:
-          - sh-c
-          - run_in_repo
         run: ls -l && date > /local/cached/current_time
         image: docker.io/library/golang:1.26.0-alpine
+        skip_executors:
+          - with_secret_driver
     cache:
       - /local/cached
     skip_steps: "*"
