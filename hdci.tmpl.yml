@@ -36,6 +36,11 @@ executors:
     run_++: |+
       cd app
 
+default_executors:
+  - with_secret_driver
+  - sh-c
+  - run_in_repo
+
 scripts:
   load_secret_driver:
     entrypoint_: ['/bin/sh', '-c']
@@ -45,6 +50,13 @@ scripts:
     image: $ctx.hdci.worker.identity.sec_driver_image
     run_: 'cp $SEC_DRIVER $(dirname $SEC_DRIVER)/docker-entrypoint.sh "$WORK_DIR" && echo sec driver copied'
     run: ""
+    skip_executor:  "*"
+
   github_checkout:
     run: 'git clone https://github.com/"${GITHUB_REPO:-{{ .ctx.git_repo -}} }.git" --branch "${GITHUB_BRANCH:-{{ toString .ctx.git_ref | base -}} }" app'
     executor: gh_with_app
+    skip_executors: "*"
+
+default_script_steps:
+  - load_secret_driver
+  - gh_checkout

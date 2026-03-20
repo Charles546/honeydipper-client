@@ -1,6 +1,7 @@
 ---
 use_templates:
-  - Charles546/honeydipper-client@refs/heads/test:hdci.tmpl.yml
+  # - Charles546/honeydipper-ci@refs/heads/main:resources/hdci.tmpl.yml
+  - hdci.tmpl.yml
 
 cache:
   /local/cached: 'hd-cache-{{ replace "/" "_" .ctx.git_repo }}-{{ .ctx.git_commit | trunc 7 }}'
@@ -32,8 +33,6 @@ stages:
 jobs:
   test:
     steps:
-      - load_secret_driver
-      - github_checkout
       - container_name: test
         executor:
           - sh-c
@@ -42,3 +41,4 @@ jobs:
         image: docker.io/library/golang:1.26.0-alpine
     cache:
       - /local/cached
+    skip_steps: "*"
